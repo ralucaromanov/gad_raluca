@@ -1,0 +1,46 @@
+{% extends 'base.html' %} {% block content %}
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 card mb-4  mt-3 left  top">
+      <div class="card-body">
+        <h1>{% block title %} {{ object.title }} {% endblock title %}</h1>
+        <h2>{{ post.title }} </h2>
+        <p class=" text-muted">{{ post.created_on }}</p>
+        <p class="card-text ">{{ post.content | safe }}</p>
+      </div>
+    </div>
+     
+    <div class="col-md-12 card mb-4  mt-3 ">
+<div class="card-body">
+  
+  <h2> Comments...</h2>
+
+  {% if not post.comments.all %}
+      No comments yet.
+
+  {% else %}
+
+      {% for comment in post.comments.all %}
+      <div class="comments" style="padding: 10px;">
+          <p class="font-weight-bold">
+            {{ comment.name }}
+            <span class=" text-muted font-weight-normal">
+              {{ comment.created_on }}
+            </span>
+          </p>
+          {{ comment.content | linebreaks }}
+        </div>
+        {% endfor %}
+  {% endif %}
+</div>
+
+</div>
+{% block comment_section %} {% include 'comment_section.html' %} {% endblock comment_section %} 
+
+</div>
+
+
+
+{% endblock content %}

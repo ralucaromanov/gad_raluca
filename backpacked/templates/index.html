@@ -1,0 +1,57 @@
+{% extends "base.html" %} 
+{% block content %}
+<style>
+    body {
+        font-family: "Roboto", sans-serif;
+        font-size: 14px;
+        background-color: #fdfdfd;
+    }
+    
+    .head_text {
+        color: white;
+    }
+    
+    .card {
+        box-shadow: 0 16px 48px #b4b5b1;
+    }
+    h2 {
+        text-align: center;
+        
+    }
+    
+</style>
+
+<header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+        <h6 class=" head_text"> Hello! My name is Raluca and this is where I will share my backpacked adventures through the Romanian Mountains. Stay tuned!  </h6>
+        
+    </div>
+</header>
+
+
+<div class="container" align="center">
+      <div class="row" >
+        <div class="col-md-8 mt-4 mb-4" >
+          {% for post in post_list %}
+        <div class="card mb-4" style="height: 200px" >
+            <img class="card-img" src="{{ post.image.url }}" height="200px">
+          <div class="card-img-overlay">
+            <p>
+                
+
+            </p>
+
+            <h2 ><a class="article-title text-white" href="{% url 'post_detail' post.slug  %}">{{ post.title }}</a></h2>
+            <p align="center" >{{ post.created_on }}</p>
+            
+                       
+          </div>
+        </div>
+    {% endfor %}
+        </div>
+             {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+
+      </div>
+    </div>
+{%endblock%}
